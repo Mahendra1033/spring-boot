@@ -1,0 +1,81 @@
+server:
+  port: 6611
+
+home:
+  message: Welcome to Go Learn To Lead !!!
+
+logging:
+  file:
+    path: src/main/resources/logs/
+    name: src/main/resources/logs/loggers.txt
+
+spring:
+  profiles:
+    active: qa
+
+
+---
+
+spring:
+  profiles:
+    - dev
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:dcbapp-dev
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+
+
+---
+
+spring:
+  profiles:
+    - qa
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:dcbapp-qa
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"
+
+---
+
+spring:
+  profiles:
+    - prod
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:dcbapp-prod
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+
